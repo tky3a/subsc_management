@@ -102,6 +102,20 @@ flutter run
 | `R` | ホットリスタート |
 | `q` | アプリ終了 |
 
+## ディレクトリ構成
+
+```
+lib/
+├── main.dart               # エントリーポイント（DB を開いてアプリを起動）
+├── app_state.dart          # 画面間で共有する状態
+├── data/                   # DB を開く処理、初期データ、データの読み書き、データの型
+├── ui/                     # 6 つの画面と共通部品
+├── theme/app_theme.dart    # ダークテーマの色とフォント
+└── util/format.dart        # 金額や日付の表示形式
+test/                       # テスト（flutter test で実行）
+docs/db/                    # DB スキーマ・クエリ・サンプルデータ
+```
+
 ## 開発用コマンド
 
 ```bash
