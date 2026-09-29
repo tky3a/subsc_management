@@ -1,5 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../util/format.dart';
+
 /// 初回起動時に投入するマスタデータ（DB バージョン 1）。
 /// ※ サービス・プランの金額は docs/db/seed_sample.sql と同じダミー値。
 ///   リリース前に各サービスの最新価格を確認して差し替えること。
@@ -38,6 +40,22 @@ void seedMasterData(Batch batch) {
       'sort_order': order,
     });
   }
+}
+
+/// ドル建てを最初から円で表示・合計できるようにするための初期レート（1 ドルあたりの円）。
+const initialUsdRate = 150.0;
+
+/// DB バージョン 8: USD のレートが 1 件もなければ初期レートを登録する。
+/// ユーザーが登録済みのレートは上書きしない。以降は為替レート画面で手入力して更新する。
+Future<void> seedMasterDataV8(DatabaseExecutor db) async {
+  final count = Sqflite.firstIntValue(
+      await db.rawQuery("SELECT COUNT(*) FROM exchange_rates WHERE currency_code = 'USD'"));
+  if (count != 0) return;
+  await db.insert('exchange_rates', {
+    'currency_code': 'USD',
+    'rate_to_jpy': initialUsdRate,
+    'rate_date': isoDate(DateTime.now()),
+  });
 }
 
 typedef _PresetPlan = (String name, String currency, int price, int intervalMonths);

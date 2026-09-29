@@ -6,7 +6,7 @@ import 'seed.dart';
 class AppDatabase {
   static const fileName = 'subsc_management.db';
   static const schemaAsset = 'docs/db/schema.sql';
-  static const version = 7;
+  static const version = 8;
 
   static Future<Database> open({
     required DatabaseFactory factory,
@@ -32,6 +32,7 @@ class AppDatabase {
           await seedMasterDataV5(db);
           await seedMasterDataV6(db);
           await seedMasterDataV7(db);
+          await seedMasterDataV8(db);
         },
         onUpgrade: (db, oldVersion, _) async {
           if (oldVersion < 2) await seedMasterDataV2(db);
@@ -40,6 +41,7 @@ class AppDatabase {
           if (oldVersion < 5) await seedMasterDataV5(db);
           if (oldVersion < 6) await seedMasterDataV6(db);
           if (oldVersion < 7) await seedMasterDataV7(db);
+          if (oldVersion < 8) await seedMasterDataV8(db);
         },
       ),
     );
