@@ -15,7 +15,15 @@ INSERT INTO services (id, name, service_type, category) VALUES
     (1, 'Netflix',    'both', '動画'),
     (2, 'Spotify',    'app',  '音楽'),
     (3, 'Google One', 'both', 'クラウド'),
-    (4, 'ChatGPT',    'both', 'AI');
+    (4, 'ChatGPT',    'both', 'AI'),
+    (5, 'Hulu',          'both', '動画'),
+    (6, 'Google AI Pro', 'both', 'AI'),
+    (7, 'Claude Code',   'both', 'AI'),
+    (8, 'Cloudflare',    'web',  'インフラ'),
+    (9, 'Moises',        'app',  '音楽'),
+    (10, 'Amazon Prime', 'both', 'ショッピング'),
+    (11, 'スマホ・ネット通信量', 'both', '通信'),
+    (12, 'U-FRET',       'app',  '音楽');
 
 INSERT INTO plans (id, service_id, name, currency_code, price, billing_interval_months, sort_order) VALUES
     (1, 1, '広告つきスタンダード', 'JPY',  890,  1, 1),
@@ -25,7 +33,17 @@ INSERT INTO plans (id, service_id, name, currency_code, price, billing_interval_
     (5, 2, 'Duo',                  'JPY', 1480,  1, 2),
     (6, 3, '100GB',                'JPY',  250,  1, 1),
     (7, 3, '100GB',                'JPY', 2500, 12, 2),
-    (8, 4, 'Plus',                 'USD', 2000,  1, 1);   -- $20.00
+    (8, 4, 'Plus',                 'USD', 2000,  1, 1),   -- $20.00
+    (9, 5, '月額プラン',           'JPY', 1026,  1, 1),
+    (10, 6, '月額プラン',          'JPY', 2900,  1, 1),
+    (11, 7, '月額プラン',          'USD', 2200,  1, 1),   -- $22.00
+    (12, 8, '年額プラン',          'USD', 1200, 12, 1),   -- $12.00 / 年
+    (13, 9, 'Premium',             'JPY', 1180,  1, 1),
+    (14, 9, 'Premium',             'JPY', 11800, 12, 2),
+    (15, 10, '月額プラン',         'JPY',  600,  1, 1),
+    (16, 10, '年額プラン',         'JPY', 5900, 12, 2),
+    (17, 11, '月額プラン',         'JPY', 12000, 1, 1),
+    (18, 12, '月額プラン',         'JPY',  650,  1, 1);
 
 -- 契約例: Netflix スタンダード（月額） / Spotify Individual（値上げ分を手動で書き換え）
 --         Google One 100GB（年額） / ChatGPT Plus（ドル払い・月額）

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- アダプティブアイコンの前景（A 案「循環するS」）。assets/icon/app_icon.svg と同じ図形。
+     108dp のキャンバスに、円形マスクの安全領域（直径 66dp）へ収まる大きさで配置している。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <group
+        android:pivotX="256"
+        android:pivotY="256"
+        android:scaleX="0.64"
+        android:scaleY="0.64">
+        <path
+            android:pathData="M336,176 A80,80 0 1,0 256,256 A80,80 0 1,1 176,336"
+            android:strokeColor="#7FD8C4"
+            android:strokeWidth="52"
+            android:strokeLineCap="round" />
+        <path
+            android:pathData="M128,356 L176,300 L224,356"
+            android:strokeColor="#7FD8C4"
+            android:strokeWidth="52"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+</vector>

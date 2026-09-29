@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- アプリアイコン A 案「循環するS」（正方形・角丸なしの元データ） -->
+  <rect width="512" height="512" fill="#101214"/>
+  <path d="M336 176 A80 80 0 1 0 256 256 A80 80 0 1 1 176 336" fill="none" stroke="#7FD8C4" stroke-width="52" stroke-linecap="round"/>
+  <path d="M128 356 L176 300 L224 356" fill="none" stroke="#7FD8C4" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
