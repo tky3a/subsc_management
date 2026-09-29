@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Android 7 以前向け（角丸の背景つき） -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="#101214"/>
+  <g transform="translate(256 256) scale(0.86) translate(-256 -256)">
+    <path d="M336 176 A80 80 0 1 0 256 256 A80 80 0 1 1 176 336" fill="none" stroke="#7FD8C4" stroke-width="52" stroke-linecap="round"/>
+    <path d="M128 356 L176 300 L224 356" fill="none" stroke="#7FD8C4" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
