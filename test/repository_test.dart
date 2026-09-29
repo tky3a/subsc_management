@@ -90,6 +90,7 @@ void main() {
         ));
     await SubscriptionRepository(v1).addCustomService(
         name: 'Hulu', category: '動画', planName: '自分で追加', currencyCode: 'JPY', price: 1000, intervalMonths: 1);
+    await SubscriptionRepository(v1).saveRate('USD', 140.0, '2026-08-01');
     await v1.close();
 
     final db = await AppDatabase.open(factory: databaseFactoryFfi, path: path, schemaSql: schemaSql);
@@ -99,6 +100,8 @@ void main() {
     expect(services.where((s) => s.name == 'Hulu'), hasLength(1));
     final hulu = services.firstWhere((s) => s.name == 'Hulu');
     expect((await repo.plans(hulu.id)).single.name, '自分で追加');
+    // ユーザーが登録済みのレートは初期レートで上書きしない
+    expect((await repo.rates('USD')).map((r) => r.rateToJpy), [140.0]);
     expect(services.map((s) => s.name), containsAll(['Google AI Pro', 'Claude Code', 'Cloudflare', 'Moises', 'Amazon Prime', 'スマホ・ネット通信量', 'U-FRET']));
   });
 
@@ -164,8 +167,23 @@ void main() {
     expect((await repo.subscription(spotify.id))!.effectivePrice, 1080);
   });
 
+  test('初期レート（1 ドル 150 円）が入っていて、ドル建ても最初から円で換算される', () async {
+    final repo = await openRepo();
+    final rates = await repo.rates('USD');
+    expect(rates.single.rateToJpy, initialUsdRate);
+
+    final claude = (await repo.services()).firstWhere((s) => s.name == 'Claude Code');
+    final plan = (await repo.plans(claude.id)).single;
+    final id = await repo.addSubscription(planId: plan.id, customPrice: null, startDate: '2026-09-01', billingDay: 1);
+    final sub = (await repo.subscription(id))!;
+    expect(sub.hasRate, isTrue);
+    expect(sub.monthlyCostJpy, 3300); // $22 × 150
+    expect(sub.yearlyCostJpy, 39600);
+  });
+
   test('レート未登録のドル建ては円換算されず、月次記録にも含まれない', () async {
     final repo = await openRepo();
+    await repo.db.delete('exchange_rates');
     final chatgpt = (await repo.services()).firstWhere((s) => s.name == 'ChatGPT');
     final plan = (await repo.plans(chatgpt.id)).single;
     final id = await repo.addSubscription(planId: plan.id, customPrice: null, startDate: '2026-09-01', billingDay: 1);
